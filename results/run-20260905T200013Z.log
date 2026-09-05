@@ -1,0 +1,217 @@
+=== local-bench sweep 20260905T200013Z (repeats=5) ===
+
+== bounded tasks ==
+models: ['ornith:9b', 'gemma4:12b', 'gpt-oss:20b', 'gemma4:e4b', 'qwen3.6:27b', 'gemma4:26b', 'ornith:35b']
+tasks: ['t1_dedupe', 't1_parse_kv', 't2_classify', 't2_heat', 't2_tail', 't3_provenance', 't3_fold_edges', 't3_merge', 'a2_audit_config', 'a2_audit_code']  warm_k=5
+
+== ornith:9b ==
+  placement=gpu  cold-load=5315ms
+  t1_dedupe        pass 5/5     1.0s     56 tok
+  t1_parse_kv      pass 5/5     1.1s     65 tok
+  t2_classify      pass 5/5     1.1s     65 tok
+  t2_heat          pass 5/5     0.8s     43 tok
+  t2_tail          pass 5/5     0.9s     52 tok
+  t3_provenance    pass 5/5     1.5s     98 tok
+  t3_fold_edges    pass 5/5     1.8s    116 tok
+  t3_merge         pass 5/5     0.9s     54 tok
+  a2_audit_config  pass 0/5     0.2s     12 tok  <-- MISS
+  a2_audit_code    pass 5/5     0.2s     12 tok
+
+== gemma4:12b ==
+  placement=gpu  cold-load=6334ms
+  t1_dedupe        pass 5/5     1.4s     57 tok
+  t1_parse_kv      pass 5/5     1.9s     83 tok
+  t2_classify      pass 5/5     1.5s     64 tok
+  t2_heat          pass 5/5     1.2s     48 tok
+  t2_tail          pass 5/5     1.1s     43 tok
+  t3_provenance    pass 5/5     2.7s    120 tok
+  t3_fold_edges    pass 5/5     2.8s    128 tok
+  t3_merge         pass 5/5     1.4s     60 tok
+  a2_audit_config  pass 5/5     0.4s     12 tok
+  a2_audit_code    pass 5/5     0.4s     12 tok
+
+== gpt-oss:20b ==
+  placement=gpu  cold-load=11529ms
+  t1_dedupe        pass 5/5     2.4s    233 tok
+  t1_parse_kv      pass 5/5     4.7s    479 tok
+  t2_classify      pass 5/5     3.7s    375 tok
+  t2_heat          pass 5/5     2.4s    229 tok
+  t2_tail          pass 5/5     7.7s    788 tok
+  t3_provenance    pass 5/5     3.9s    399 tok
+  t3_fold_edges    pass 5/5     4.3s    428 tok
+  t3_merge         pass 5/5     3.6s    373 tok
+  a2_audit_config  pass 5/5     2.8s    273 tok
+  a2_audit_code    pass 5/5     1.7s    155 tok
+
+== gemma4:e4b ==
+  placement=gpu  cold-load=8602ms
+  t1_dedupe        pass 5/5     0.8s     57 tok
+  t1_parse_kv      pass 5/5     1.2s     84 tok
+  t2_classify      pass 5/5     1.1s     68 tok
+  t2_heat          pass 5/5     0.9s     51 tok
+  t2_tail          pass 5/5     0.9s     57 tok
+  t3_provenance    pass 5/5     1.4s    105 tok
+  t3_fold_edges    pass 0/5     1.9s    141 tok  <-- MISS
+  t3_merge         pass 5/5     0.8s     64 tok
+  a2_audit_config  pass 5/5     0.2s     12 tok
+  a2_audit_code    pass 5/5     0.3s     12 tok
+
+== qwen3.6:27b ==
+  placement=mixed:86%  cold-load=18920ms
+  t1_dedupe        pass 5/5     5.0s     51 tok
+  t1_parse_kv      pass 5/5     7.5s     67 tok
+  t2_classify      pass 5/5     6.5s     65 tok
+  t2_heat          pass 5/5     4.2s     43 tok
+  t2_tail          pass 5/5     3.5s     37 tok
+  t3_provenance    pass 5/5     9.4s     93 tok
+  t3_fold_edges    pass 5/5    12.2s    122 tok
+  t3_merge         pass 5/5     5.4s     54 tok
+  a2_audit_config  pass 5/5     1.1s     12 tok
+  a2_audit_code    pass 5/5     1.1s     12 tok
+
+== gemma4:26b ==
+  placement=mixed:79%  cold-load=17883ms
+  t1_dedupe        pass 5/5     1.2s     57 tok
+  t1_parse_kv      pass 5/5     2.0s     83 tok
+  t2_classify      pass 5/5     1.6s     68 tok
+  t2_heat          pass 5/5     1.1s     48 tok
+  t2_tail          pass 5/5     0.9s     41 tok
+  t3_provenance    pass 5/5     2.2s    105 tok
+  t3_fold_edges    pass 5/5     2.5s    109 tok
+  t3_merge         pass 5/5     1.4s     64 tok
+  a2_audit_config  pass 5/5     0.3s     12 tok
+  a2_audit_code    pass 5/5     0.2s     12 tok
+
+== ornith:35b ==
+  placement=mixed:72%  cold-load=17739ms
+  t1_dedupe        pass 5/5     1.1s     51 tok
+  t1_parse_kv      pass 5/5     1.8s     76 tok
+  t2_classify      pass 5/5     1.5s     70 tok
+  t2_heat          pass 5/5     0.9s     43 tok
+  t2_tail          pass 5/5     0.8s     38 tok
+  t3_provenance    pass 5/5     2.1s     98 tok
+  t3_fold_edges    pass 5/5     2.8s    116 tok
+  t3_merge         pass 5/5     1.4s     54 tok
+  a2_audit_config  pass 0/5     0.3s     12 tok  <-- MISS
+  a2_audit_code    pass 5/5     0.3s     12 tok
+
+summary -> /data/NuCode/local-bench/results/summary.md
+
+== multi-file project (single vs split) ==
+models: ['ornith:9b', 'gemma4:12b', 'gpt-oss:20b', 'gemma4:e4b', 'qwen3.6:27b', 'gemma4:26b', 'ornith:35b']  repeats=5
+L = level passed, · = level failed (l1 logic gate, l2 render, l3 ui)
+
+== ornith:9b ==
+  single ornith:9b           ·1L2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:9b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:9b           ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:9b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:9b           ·1L2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:9b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:9b           ·1L2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:9b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:9b           ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:9b (self-split) ·1L2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  => single      L1 0/5  L2 5/5  L3 2/5
+  => split       L1 0/5  L2 3/5  L3 2/5
+== gemma4:12b ==
+  single gemma4:12b          ·1·2·3  (SyntaxError: invalid syntax (logic.py, line 47))
+  split  gemma4:12b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:12b          ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:12b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:12b          L1L2L3
+  split  gemma4:12b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:12b          ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:12b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:12b          ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:12b (self-split) ·1L2·3  (AttributeError: module 'logic' has no attribute 'new_board')
+  => single      L1 1/5  L2 4/5  L3 4/5
+  => split       L1 0/5  L2 5/5  L3 4/5
+== gpt-oss:20b ==
+  single gpt-oss:20b         ·1L2L3  (TypeError: Population must be a sequence.  For dicts or sets, use sorted(d).)
+  split  gpt-oss:20b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gpt-oss:20b         ·1L2·3  (won)
+  split  gpt-oss:20b (self-split) L1L2L3
+  single gpt-oss:20b         ·1L2L3  (TypeError: Population must be a sequence.  For dicts or sets, use sorted(d).)
+  split  gpt-oss:20b (self-split) L1L2L3
+  single gpt-oss:20b         ·1L2L3  (TypeError: Population must be a sequence.  For dicts or sets, use sorted(d).)
+  split  gpt-oss:20b (self-split) L1L2L3
+  single gpt-oss:20b         L1L2L3
+  split  gpt-oss:20b (self-split) L1L2L3
+  => single      L1 1/5  L2 5/5  L3 4/5
+  => split       L1 4/5  L2 5/5  L3 5/5
+== gemma4:e4b ==
+  single gemma4:e4b          ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:e4b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:e4b          ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:e4b (self-split) ·1·2·3  (AttributeError: 'generator' object has no attribute 'issubset')
+  single gemma4:e4b          ·1·2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:e4b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:e4b          ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:e4b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:e4b          ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  gemma4:e4b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  => single      L1 0/5  L2 0/5  L3 1/5
+  => split       L1 0/5  L2 0/5  L3 0/5
+== qwen3.6:27b ==
+  single qwen3.6:27b         L1L2L3
+  split  qwen3.6:27b (self-split) L1L2L3
+  single qwen3.6:27b         L1L2L3
+  split  qwen3.6:27b (self-split) L1L2L3
+  single qwen3.6:27b         L1L2L3
+  split  qwen3.6:27b (self-split) L1L2L3
+  single qwen3.6:27b         L1L2L3
+  split  qwen3.6:27b (self-split) L1L2L3
+  single qwen3.6:27b         L1L2L3
+  split  qwen3.6:27b (self-split) L1L2L3
+  => single      L1 5/5  L2 5/5  L3 5/5
+  => split       L1 5/5  L2 5/5  L3 5/5
+== gemma4:26b ==
+  single gemma4:26b          ·1L2L3  (TypeError: tuple expected at most 1 argument, got 2)
+  split  gemma4:26b (self-split) ·1L2·3  (TypeError: tuple expected at most 1 argument, got 2)
+  single gemma4:26b          ·1·2·3  (TypeError: tuple expected at most 1 argument, got 2)
+  split  gemma4:26b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single gemma4:26b          ·1L2L3  (TypeError: tuple expected at most 1 argument, got 2)
+  split  gemma4:26b (self-split) ·1L2·3  (TypeError: tuple expected at most 1 argument, got 2)
+  single gemma4:26b          ·1L2·3  (TypeError: tuple expected at most 1 argument, got 2)
+  split  gemma4:26b (self-split) ·1L2L3  (TypeError: tuple expected at most 1 argument, got 2)
+  single gemma4:26b          ·1L2·3  (TypeError: tuple expected at most 1 argument, got 2)
+  split  gemma4:26b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  => single      L1 0/5  L2 4/5  L3 2/5
+  => split       L1 0/5  L2 5/5  L3 3/5
+== ornith:35b ==
+  single ornith:35b          L1L2L3
+  split  ornith:35b (self-split) ·1·2·3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:35b          ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:35b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:35b          ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  split  ornith:35b (self-split) ·1L2L3  (AttributeError: 'NoneType' object has no attribute 'height')
+  single ornith:35b          L1L2L3
+  split  ornith:35b (self-split) L1L2L3
+  single ornith:35b          L1L2·3
+  split  ornith:35b (self-split) L1L2L3
+  => single      L1 3/5  L2 5/5  L3 4/5
+  => split       L1 2/5  L2 4/5  L3 4/5
+
+== report pipeline (local arm) ==
+subject: local-bench (1702 chars of facts)
+models: ['gemma4:e4b', 'gemma4:12b', 'gemma4:26b', 'gpt-oss:20b', 'qwen3.6:27b', 'ornith:35b']
+
+  gemma4:e4b     gpu         report 61% (cov 75% facts 0% sec 100% clean)  audit 70%  861 tok  12.6s
+  gemma4:12b     gpu         report 67% (cov 75% facts 20% sec 100% clean)  audit 0%  893 tok  21.5s
+  gemma4:26b     mixed:79%   report 67% (cov 75% facts 20% sec 100% clean)  audit 80%  803 tok  22.6s
+  gpt-oss:20b    gpu         report 78% (cov 88% facts 40% sec 100% clean)  audit 80%  3853 tok  38.8s
+  qwen3.6:27b    mixed:86%   report 84% (cov 88% facts 60% sec 100% clean)  audit 70%  1113 tok  118.2s
+  ornith:35b     mixed:72%   report 73% (cov 75% facts 40% sec 100% clean)  audit 70%  824 tok  22.9s
+
+== ranked by report quality ==
+  qwen3.6:27b    report 84%  audit 70%  1113 tok
+  gpt-oss:20b    report 78%  audit 80%  3853 tok
+  ornith:35b     report 73%  audit 70%  824 tok
+  gemma4:12b     report 67%  audit 0%  893 tok
+  gemma4:26b     report 67%  audit 80%  803 tok
+  gemma4:e4b     report 61%  audit 70%  861 tok
+
+== cloud arms SKIPPED (no ANTHROPIC_API_KEY; wrap with 'bao-kit with' to include them) ==
+
+=== done -> results/run-20260905T200013Z.log ===

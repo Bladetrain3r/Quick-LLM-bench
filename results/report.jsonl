@@ -1,0 +1,12 @@
+{"model": "gemma4:e4b", "placement": "gpu", "cold_load_ms": 8373.5, "report_overall": 0.672, "coverage": 0.75, "facts": 0.2, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 791, "wall_s": 11.9}
+{"model": "gemma4:12b", "placement": "gpu", "cold_load_ms": 3810.7, "report_overall": 0.672, "coverage": 0.75, "facts": 0.2, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 798, "wall_s": 19.9}
+{"model": "gemma4:26b", "placement": "mixed:79%", "cold_load_ms": 17636.7, "report_overall": 0.672, "coverage": 0.75, "facts": 0.2, "sections": 1.0, "clean": 1.0, "audit_acc": 0.8, "tokens": 843, "wall_s": 23.8}
+{"model": "gpt-oss:20b", "placement": "gpu", "cold_load_ms": 12005.2, "report_overall": 0.776, "coverage": 0.875, "facts": 0.4, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 4277, "wall_s": 43.1}
+{"model": "qwen3.6:27b", "placement": "mixed:86%", "cold_load_ms": 18309.7, "report_overall": 0.776, "coverage": 0.875, "facts": 0.4, "sections": 1.0, "clean": 1.0, "audit_acc": 0.8, "tokens": 1151, "wall_s": 132.8}
+{"model": "ornith:35b", "placement": "mixed:72%", "cold_load_ms": 17323.9, "report_overall": 0.733, "coverage": 0.75, "facts": 0.4, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 1017, "wall_s": 33.5}
+{"model": "gemma4:e4b", "placement": "gpu", "cold_load_ms": 8125.0, "report_overall": 0.612, "coverage": 0.75, "facts": 0.0, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 861, "wall_s": 12.6}
+{"model": "gemma4:12b", "placement": "gpu", "cold_load_ms": 7108.0, "report_overall": 0.672, "coverage": 0.75, "facts": 0.2, "sections": 1.0, "clean": 1.0, "audit_acc": 0.0, "tokens": 893, "wall_s": 21.5}
+{"model": "gemma4:26b", "placement": "mixed:79%", "cold_load_ms": 17182.5, "report_overall": 0.672, "coverage": 0.75, "facts": 0.2, "sections": 1.0, "clean": 1.0, "audit_acc": 0.8, "tokens": 803, "wall_s": 22.6}
+{"model": "gpt-oss:20b", "placement": "gpu", "cold_load_ms": 11542.7, "report_overall": 0.776, "coverage": 0.875, "facts": 0.4, "sections": 1.0, "clean": 1.0, "audit_acc": 0.8, "tokens": 3853, "wall_s": 38.8}
+{"model": "qwen3.6:27b", "placement": "mixed:86%", "cold_load_ms": 17767.0, "report_overall": 0.836, "coverage": 0.875, "facts": 0.6, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 1113, "wall_s": 118.2}
+{"model": "ornith:35b", "placement": "mixed:72%", "cold_load_ms": 17004.3, "report_overall": 0.733, "coverage": 0.75, "facts": 0.4, "sections": 1.0, "clean": 1.0, "audit_acc": 0.7, "tokens": 824, "wall_s": 22.9}
