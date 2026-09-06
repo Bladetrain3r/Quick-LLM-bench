@@ -1,0 +1,44 @@
+{
+ "gpt-oss:20b": {
+  "usable_ctx": 131072,
+  "usable_tokens": 107370,
+  "first_truncated_at": null,
+  "grader_ok": true,
+  "note": "clean"
+ },
+ "gemma4:12b": {
+  "usable_ctx": 131072,
+  "usable_tokens": 131157,
+  "first_truncated_at": null,
+  "grader_ok": true,
+  "note": "clean"
+ },
+ "qwen-3-8-27:latest": {
+  "usable_ctx": 131072,
+  "usable_tokens": 131156,
+  "first_truncated_at": null,
+  "grader_ok": true,
+  "note": "clean"
+ },
+ "ornith:9b": {
+  "usable_ctx": 131072,
+  "usable_tokens": 131156,
+  "first_truncated_at": null,
+  "grader_ok": true,
+  "note": "clean"
+ },
+ "nemotron-3-nano:4b": {
+  "usable_ctx": 16384,
+  "usable_tokens": 17219,
+  "first_truncated_at": 32768,
+  "grader_ok": true,
+  "note": "truncates ~32,768; usable ~16,384 (17,219 tok confirmed)"
+ },
+ "llama3.2:3b": {
+  "usable_ctx": 131072,
+  "usable_tokens": 107323,
+  "first_truncated_at": null,
+  "grader_ok": true,
+  "note": "clean"
+ }
+}

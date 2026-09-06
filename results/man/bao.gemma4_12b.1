@@ -1,0 +1,130 @@
+.TH BAO 1 "2026-09-06" "NuCode" "LAN vault"
+.SH NAME
+bao \- OpenBao vault as deployed on the NuCode LAN
+.SH DESCRIPTION
+.TP
+.BI bao
+The OpenBao command-line client (a static Go binary, version 2.6.2 on this box). This page documents OpenBao AS DEPLOYED on the NuCode LAN, not the full upstream CLI (for that run: bao -h , or see the OpenBao docs).
+.PP
+The vault runs as a Docker container named bao from /data/NuCode/Bao, reachable at https://192.168.88.18:8200 on the LAN and loopback only, behind a self-signed certificate.
+.PP
+Day to day you drive it through bao-kit(1), which sets the address, the CA cert and the token for you; reach for raw bao only for things bao-kit does not wrap.
+.SH DEPLOYMENT
+
+.PP
+The vault is a docker compose service named bao, defined in .BR /data/NuCode/Bao/docker-compose.yml, using image .BR openbao/openbao:2.6.2.
+
+.PP
+Raft storage lives on a named docker volume, so recreating the container does not lose data.
+
+.PP
+The listener binds 0.0.0.0:8200 inside the container; the host publishes it on 127.0.0.1:8200 and 192.168.88.18:8200.
+
+.PP
+TLS is a self-signed cert; clients must trust .BR tls/bao.crt (BAO_CACERT).
+
+.PP
+The audit device and the kv v2 engine at kv/ are enabled at init time.
+.SH ENVIRONMENT
+
+.TP
+.BI BAO_ADDR
+The address of the server: https://192.168.88.18:8200.
+.TP
+.BI BAO_CACERT
+Path to tls/bao.crt, so the client trusts the self-signed cert.
+.TP
+.BI BAO_TOKEN
+The auth token; if unset, bao-kit loads the cached login from ~/.config/openbao/token.
+.TP
+.BI eval "$(bao-kit env)"
+The quickest way to set all three.
+.SH DAILY USE
+
+.PP
+The host sleeps at night and the vault SEALS on every boot, so the day starts sealed. The morning ritual is:
+
+.nf
+bao-kit unseal
+.fi
+(reads the stored key, unseals)
+
+.nf
+bao-kit login
+.fi
+(caches a 12h operator token)
+
+.PP
+After that, bao-kit status should show sealed: False and a valid token. Raw equivalents exist (bao operator unseal, bao login) but the kit is the path.
+.SH COMMANDS YOU USE
+
+.TP
+.BI bao status
+Seal and HA status.
+.TP
+.BI bao operator unseal KEY
+Submit an unseal key share (bao-kit unseal wraps this).
+.TP
+.BI bao kv get \-mount=kv PATH
+Read a secret (prints it; mind the transcript).
+.TP
+.BI bao kv put \-mount=kv PATH field=value
+Replace a secret (whole secret).
+.TP
+.BI bao kv patch \-mount=kv PATH field=value
+Merge fields into a secret (this is what bao-kit put uses).
+.TP
+.BI bao token lookup
+.TP
+.BI bao token create
+Inspect or mint tokens.
+.TP
+.BI bao login \-method=userpass username=ziggy
+Authenticate.
+.TP
+.BI bao unwrap TOKEN
+Unwrap a response-wrapping token.
+.SH TROUBLESHOOTING
+.TP
+.BI Connection refused on 8200 though docker ps shows the container Up
+Docker started the container without installing the host port publish (docker inspect shows PortBindings set but NetworkSettings.Ports empty; nothing listens on host :8200). It follows iptables churn from the LAN NAT link.
+.FI cd /data/NuCode/Bao && docker compose down && docker compose up -d
+The raft data is on the named volume, so nothing is lost. Verify with docker port bao (expect both 127.0.0.1:8200 and 192.168.88.18:8200).
+.TP
+.BI Every call 403s right after login
+A stale exported BAO_TOKEN is shadowing the fresh cached token.
+.FI unset BAO_TOKEN
+before the command.
+.TP
+.BI sealed: True after a reboot
+Expected; run bao-kit unseal.
+.SH FILES
+
+.TP
+.BI /data/NuCode/Bao/docker-compose.yml
+the compose service.
+.TP
+.BI /data/NuCode/Bao/tls/bao.crt
+the self-signed CA cert (BAO_CACERT).
+.TP
+.BI /data/NuCode/Bao/config/
+the OpenBao server config (declares the listener and the file audit device).
+.TP
+.BI ~/.config/openbao/init.json
+unseal key and root token, mode 600.
+.TP
+.BI ~/.config/openbao/token
+cached operator login, mode 600.
+.SH SEE ALSO
+.TP
+.BI bao-kit(1)
+The wrapper you use day to day.
+.TP
+.BI /data/NuCode/Bao/README.md
+The vault repo README is authoritative.
+.TP
+.BI bao -h
+The full upstream CLI is in bao -h and the OpenBao documentation.
+.TP
+.BI man ./docs/bao.1
+Read this page without installing it: man ./docs/bao.1

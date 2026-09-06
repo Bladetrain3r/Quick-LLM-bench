@@ -1,0 +1,78 @@
+.TH BAO 1 "2026-09-06" "NuCode" "LAN vault"
+.SH NAME
+bao \- OpenBao vault as deployed on the NuCode LAN
+.SH DESCRIPTION
+.PP
+bao is the OpenBao command\-line client (a static Go binary, version 2.6.2 on this box). This page documents OpenBao AS DEPLOYED on the NuCode LAN, not the full upstream CLI (for that run: bao \-h , or see the OpenBao docs). The vault runs as a Docker container named bao from /data/NuCode/Bao, reachable at https://192.168.88.18:8200 on the LAN and loopback only, behind a self\-signed certificate. Day to day you drive it through bao-kit(1), which sets the address, the CA cert and the token for you; reach for raw bao only for things bao-kit does not wrap.
+.SH DEPLOYMENT
+.TP
+.BI "bao"
+The vault is a docker compose service named bao, defined in /data/NuCode/Bao/docker-compose.yml , image openbao/openbao:2.6.2 .
+.TP
+.BI "Raft storage"
+Raft storage lives on a named docker volume, so recreating the container does not lose data.
+.TP
+.BI "listener"
+The listener binds 0.0.0.0:8200 inside the container; the host publishes it on 127.0.0.1:8200 and 192.168.88.18:8200 .
+.TP
+.BI "TLS"
+TLS is a self-signed cert; clients must trust tls/bao.crt (BAO_CACERT).
+.TP
+.BI "audit device"
+and the kv v2 engine at kv/ are enabled at init time.
+.SH ENVIRONMENT
+.TP
+.BI BAO_ADDR
+https://192.168.88:8200
+.TP
+.BI BAO_CACERT
+path to tls/bao.crt , so the client trusts the self-signed cert.
+.TP
+.BI BAO_TOKEN
+the auth token; if unset, bao-kit loads the cached login from ~/.config/openbao/token .
+.TP
+.BI eval "$(bao-kit env)"
+sets all three environment variables.
+
+
+.SH TROUBLESHOOTING
+.TP
+.B Connection refused on 8200
+Docker started the container without installing the host port publish (docker inspect shows PortBindings set but NetworkSettings.Ports empty; nothing listens on host :8200). It follows iptables churn from the LAN NAT link. Fix: recreate, do not just restart: cd /data/NuCode/Bao && docker compose down && docker compose up \-d . The raft data is on the named volume, so nothing is lost. Verify with docker port bao (expect both 127.0.0.1:8200 and 192.168.88.18:8200).
+.TP
+.B Every call 403s right after login
+a stale exported BAO_TOKEN is shadowing the fresh cached token. Fix: unset BAO_TOKEN before the command.
+.TP
+.B sealed: True after a reboot
+expected; run bao\-kit unseal .
+.SH FILES
+.TP
+.B /data/NuCode/Bao/docker-compose.yml
+the compose service.
+.TP
+.B /data/NuCode/Bao/tls/bao.crt
+the self-signed CA cert (BAO_CACERT).
+.TP
+.B /data/NuCode/Bao/config/
+the OpenBao server config (declares the listener and the file audit device).
+.TP
+.B ~/.config/openbao/init.json
+unseal key and root token, mode 600.
+.TP
+.B ~/.config/openbao/token
+cached operator login, mode 600.
+.SH SEE ALSO
+.TP
+.BI bao-kit(1)
+Wrapper you use day to day.
+.TP
+.BI /data/NuCode/Bao/README.md
+The vault repo README is authoritative.
+.TP
+.BI bao \-h
+Full upstream CLI help.
+.TP
+.BI OpenBao documentation
+Full documentation.
+.PP
+read this page without installing it: man ./docs/bao.1

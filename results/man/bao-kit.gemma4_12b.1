@@ -1,0 +1,151 @@
+.TH BAO\-KIT 1 "2026-09-06" "NuCode" "LAN vault"
+.SH NAME
+bao-kit \- the personal-Vault workflow wrapper
+.SH DESCRIPTION
+
+.TP
+.BI bao-kit
+A single bash script wrapping the whole personal-Vault workflow for an OpenBao instance on the LAN. It is personal-grade by design.
+
+.TP
+.BI Features
+One operator (ziggy), per-project secrets, per-session tokens, and tightly scoped subagent tokens.
+
+.TP
+.BI Environment
+The script always exports BAO_ADDR and BAO_CACERT and sets BAO_FORMAT=json before running bao. If BAO_TOKEN is unset and \~/.config/openbao/token is readable, it loads that cached token and silently renews it.
+
+.TP
+.BI Security
+Secrets never print unless you explicitly ask (the unwrap command, or running bao kv get yourself).
+
+.TP
+.BI Usage
+.nf
+bao-kit COMMAND [args]
+.fi
+
+.TP
+.BI Requirements
+Requires bao and python3 on PATH.
+.SH COMMANDS
+
+.SS Setup
+.TP
+.BI init
+One-time setup. Initialises the vault with a single unseal key share, unseals it, enables the kv v2 secrets engine at kv/, enables userpass auth, enables the file audit device, writes the operator policy. Writes the unseal key and root token to \~/.config/openbao/init.json at mode 600.
+.SS Authentication
+.TP
+.BI env
+Print shell exports (\BR BAO_ADDR\BR, \BR BAO_CACERT\BR, and \BR BAO_TOKEN\BR if a login is cached); use as:
+.nf
+eval "$(bao-kit env)"
+.fi
+.TP
+.BI unseal
+The morning ritual. The PC sleeps at night and the vault seals; this reads the stored unseal key from init.json and unseals, then prints status.
+.TP
+.BI user
+Create or reset the ziggy operator user. Prompts for a password, so run it in a terminal. The user gets the operator policy and 12h tokens (24h max).
+.TP
+.BI login
+Log in as ziggy. Prompts for the password, obtains a 12h operator token, and caches it in \~/.config/openbao/token.
+.SH COMMANDS
+
+.SS Projects and secrets
+
+.TP
+.BI project NAME
+Create or refresh the policy project-NAME, granting read on kv/NAME/*, and a token role project-NAME (orphan service tokens, 24h max) that mints session tokens carrying that policy.
+.TP
+.BI put NAME/KEY field=value ...
+Store a secret at kv/NAME/KEY. It MERGES the given fields into an existing secret (it patches; it does not replace the whole secret), and creates the secret if absent.
+.TP
+.BI status
+Print seal state and health (sealed, initialized, version) and, if a token is loaded, who am I (display name, policies, ttl, metadata).
+.SH COMMANDS
+
+.SS Sessions and delegation
+
+.TP
+.BI session NAME\ [-- CMD...]
+mint an 8h token scoped to project NAME (policy project-NAME), run CMD with BAO_TOKEN, BAO_SESSION and BAO_PROJECT set in its environment, and revoke the token when CMD exits. CMD defaults to claude. Revocation cascades to any child tokens the session minted.
+.TP
+.BI sub [TTL] [USES]
+run from inside a session. Mint a use-limited child token for a subagent. TTL defaults to 30m, USES defaults to 2.
+.TP
+.BI wrap NAME/KEY [TTL]
+print a single-use response-wrapping token that carries the secret at kv/NAME/KEY. TTL defaults to 5m. Hand the token to a subagent.
+.TP
+.BI unwrap TOKEN
+the subagent side of wrap. Unwrap the token and print the secret fields as KEY=VALUE lines. This is one of the two commands that print a secret.
+.TP
+.BI with NAME/KEY:field=ENV[,field=ENV] -- CMD...
+read the secret at kv/NAME/KEY and run CMD with each named field placed in the child's environment as the given ENV variable. The secret is only ever in the child's environment, never printed.
+.SH ENVIRONMENT
+.TP
+.BI BAO_ADDR
+The vault address. Defaults to https://192.168.88.18:8200.
+.TP
+.BI BAO_CACERT
+Path to the self-signed CA cert. Defaults to the tls/bao.crt file under the bao-kit install directory.
+.TP
+.BI BAO_FORMAT
+bao-kit sets this to json internally so it can parse output. Note that with json format, bao's \-field= prints a quoted string.
+.TP
+.BI BAO_TOKEN
+The auth token. If set in the environment it takes precedence over the cached token file (this is deliberate for scoped sessions, but a STALE exported BAO_TOKEN will shadow a fresh login; see NOTES).
+.TP
+.BI BAO_SESSION, BAO_PROJECT
+Set by the session command in the child environment, naming the session id and project.
+.SH FILES
+
+.TP
+.BI ~/.config/openbao/init.json
+the unseal key and root token from init, mode 600. Required by unseal.
+.TP
+.BI ~/.config/openbao/token
+the cached operator login token, mode 600, loaded when BAO_TOKEN is unset.
+.TP
+.BI tls/bao.crt
+the self-signed CA certificate, under the install directory.
+.TP
+.BI policies/operator.hcl
+the operator policy, written by init.
+.SH NOTES
+
+.TP
+.BI BAO_TOKEN
+A stale BAO_TOKEN in the shell shadows a fresh login. bao-kit only loads the
+cached token file when BAO_TOKEN is unset, so an exported token left over from
+a previous session keeps being used and every call fails with a 403 even right
+after login. Fix: unset BAO_TOKEN before the command.
+.PP
+.TP
+.BI put
+merges fields into an existing secret rather than replacing it, so adding one
+field does not erase the others. (A plain bao kv put would replace the whole
+secret.)
+.PP
+.TP
+.BI non-root token
+A non-root token can only mint child tokens whose policies are a subset of its
+own; sessions mint through the token role project-NAME created by the
+project command.
+.PP
+.TP
+.BI vault seal
+The vault seals whenever the host reboots; unseal is a daily step.
+.SH SEE ALSO
+.TP
+.BI bao(1)
+The raw OpenBao CLI.
+.TP
+.BI bao(1)
+The local deployment as configured here.
+.TP
+.BI /data/NuCode/Bao/README.md
+The authoritative vault repo README.
+.TP
+.BI man ./docs/bao-kit.1
+Read this page without installing it.

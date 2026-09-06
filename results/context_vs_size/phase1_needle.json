@@ -1,0 +1,299 @@
+[
+ {
+  "model": "gpt-oss:20b",
+  "target": 2048,
+  "prompt_tok": 1818,
+  "retrieval": "3/3",
+  "prompt_tps": 1948.9,
+  "gen_tps": 102.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "gpt-oss:20b",
+  "target": 8192,
+  "prompt_tok": 6840,
+  "retrieval": "3/3",
+  "prompt_tps": 2390.6,
+  "gen_tps": 99.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "gpt-oss:20b",
+  "target": 16384,
+  "prompt_tok": 13536,
+  "retrieval": "3/3",
+  "prompt_tps": 2384.5,
+  "gen_tps": 95.3,
+  "placement": "gpu"
+ },
+ {
+  "model": "gpt-oss:20b",
+  "target": 32768,
+  "prompt_tok": 26946,
+  "retrieval": "3/3",
+  "prompt_tps": 2221.2,
+  "gen_tps": 85.7,
+  "placement": "gpu"
+ },
+ {
+  "model": "gpt-oss:20b",
+  "target": 65536,
+  "prompt_tok": 53748,
+  "retrieval": "3/3",
+  "prompt_tps": 1846.4,
+  "gen_tps": 66.2,
+  "placement": "gpu"
+ },
+ {
+  "model": "gpt-oss:20b",
+  "target": 131072,
+  "prompt_tok": 107370,
+  "retrieval": "3/3",
+  "prompt_tps": 1297.7,
+  "gen_tps": 47.7,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 2048,
+  "prompt_tok": 2149,
+  "retrieval": "3/3",
+  "prompt_tps": 1388.9,
+  "gen_tps": 52.3,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 8192,
+  "prompt_tok": 8287,
+  "retrieval": "3/3",
+  "prompt_tps": 1490.7,
+  "gen_tps": 51.8,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 16384,
+  "prompt_tok": 16471,
+  "retrieval": "3/3",
+  "prompt_tps": 1328.7,
+  "gen_tps": 50.3,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 32768,
+  "prompt_tok": 32861,
+  "retrieval": "3/3",
+  "prompt_tps": 1041.3,
+  "gen_tps": 46.8,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 65536,
+  "prompt_tok": 65619,
+  "retrieval": "3/3",
+  "prompt_tps": 754.7,
+  "gen_tps": 42.4,
+  "placement": "gpu"
+ },
+ {
+  "model": "gemma4:12b",
+  "target": 131072,
+  "prompt_tok": 131157,
+  "retrieval": "3/3",
+  "prompt_tps": 478.6,
+  "gen_tps": 35.8,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 2048,
+  "prompt_tok": 2148,
+  "retrieval": "3/3",
+  "prompt_tps": 702.1,
+  "gen_tps": 27.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 8192,
+  "prompt_tok": 8286,
+  "retrieval": "3/3",
+  "prompt_tps": 727.6,
+  "gen_tps": 26.7,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 16384,
+  "prompt_tok": 16470,
+  "retrieval": "3/3",
+  "prompt_tps": 656.5,
+  "gen_tps": 24.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 32768,
+  "prompt_tok": 32860,
+  "retrieval": "3/3",
+  "prompt_tps": 551.4,
+  "gen_tps": 23.0,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 65536,
+  "prompt_tok": 65618,
+  "retrieval": "3/3",
+  "prompt_tps": 412.6,
+  "gen_tps": 19.6,
+  "placement": "gpu"
+ },
+ {
+  "model": "qwen-3-8-27:latest",
+  "target": 131072,
+  "prompt_tok": 131156,
+  "retrieval": "3/3",
+  "prompt_tps": 252.7,
+  "gen_tps": 4.0,
+  "placement": "mixed:84%"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 2048,
+  "prompt_tok": 2148,
+  "retrieval": "3/3",
+  "prompt_tps": 2070.8,
+  "gen_tps": 80.6,
+  "placement": "gpu"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 8192,
+  "prompt_tok": 8286,
+  "retrieval": "3/3",
+  "prompt_tps": 2393.6,
+  "gen_tps": 77.0,
+  "placement": "gpu"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 16384,
+  "prompt_tok": 16470,
+  "retrieval": "3/3",
+  "prompt_tps": 2204.0,
+  "gen_tps": 73.1,
+  "placement": "gpu"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 32768,
+  "prompt_tok": 32860,
+  "retrieval": "3/3",
+  "prompt_tps": 1851.1,
+  "gen_tps": 66.3,
+  "placement": "gpu"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 65536,
+  "prompt_tok": 65618,
+  "retrieval": "3/3",
+  "prompt_tps": 1293.0,
+  "gen_tps": 56.4,
+  "placement": "gpu"
+ },
+ {
+  "model": "ornith:9b",
+  "target": 131072,
+  "prompt_tok": 131156,
+  "retrieval": "3/3",
+  "prompt_tps": 837.2,
+  "gen_tps": 43.4,
+  "placement": "gpu"
+ },
+ {
+  "model": "nemotron-3-nano:4b",
+  "target": 2048,
+  "prompt_tok": 2246,
+  "retrieval": "3/3",
+  "prompt_tps": 2555.8,
+  "gen_tps": 148.6,
+  "placement": "gpu"
+ },
+ {
+  "model": "nemotron-3-nano:4b",
+  "target": 8192,
+  "prompt_tok": 8663,
+  "retrieval": "3/3",
+  "prompt_tps": 3213.5,
+  "gen_tps": 147.6,
+  "placement": "gpu"
+ },
+ {
+  "model": "nemotron-3-nano:4b",
+  "target": 16384,
+  "prompt_tok": 17219,
+  "retrieval": "3/3",
+  "prompt_tps": 3112.1,
+  "gen_tps": 139.6,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 2048,
+  "prompt_tok": 1771,
+  "retrieval": "3/3",
+  "prompt_tps": 4995.8,
+  "gen_tps": 119.2,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 8192,
+  "prompt_tok": 6793,
+  "retrieval": "3/3",
+  "prompt_tps": 5852.3,
+  "gen_tps": 149.7,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 16384,
+  "prompt_tok": 13489,
+  "retrieval": "3/3",
+  "prompt_tps": 5246.5,
+  "gen_tps": 132.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 32768,
+  "prompt_tok": 26899,
+  "retrieval": "3/3",
+  "prompt_tps": 3576.5,
+  "gen_tps": 110.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 65536,
+  "prompt_tok": 53701,
+  "retrieval": "3/3",
+  "prompt_tps": 2061.6,
+  "gen_tps": 84.9,
+  "placement": "gpu"
+ },
+ {
+  "model": "llama3.2:3b",
+  "target": 131072,
+  "prompt_tok": 107323,
+  "retrieval": "3/3",
+  "prompt_tps": 932.3,
+  "gen_tps": 54.9,
+  "placement": "gpu"
+ }
+]

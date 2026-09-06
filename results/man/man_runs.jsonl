@@ -1,0 +1,6 @@
+{"page": "bao-kit", "drafter": "gemma4:12b", "placement": "gpu", "sections": 8, "sec_clean": 7, "page_warns": 4, "tok": 1581, "par_sec": 6.3, "candidate": "bao-kit.gemma4_12b.1"}
+{"page": "bao-kit", "drafter": "gpt-oss:20b", "placement": "gpu", "sections": 8, "sec_clean": 7, "page_warns": 2, "tok": 24830, "par_sec": 75.1, "candidate": "bao-kit.gpt-oss_20b.1"}
+{"page": "bao-kit", "drafter": "qwen-3-8-27:latest", "placement": "gpu", "sections": 8, "sec_clean": 8, "page_warns": 0, "tok": 1560, "par_sec": 12.1, "candidate": "bao-kit.qwen-3-8-27_latest.1"}
+{"page": "bao", "drafter": "gemma4:12b", "placement": "gpu", "sections": 8, "sec_clean": 7, "page_warns": 1, "tok": 1300, "par_sec": 4.6, "candidate": "bao.gemma4_12b.1"}
+{"page": "bao", "drafter": "gpt-oss:20b", "placement": "gpu", "sections": 8, "sec_clean": 8, "page_warns": 0, "tok": 35014, "par_sec": 76.0, "candidate": "bao.gpt-oss_20b.1"}
+{"page": "bao", "drafter": "qwen-3-8-27:latest", "placement": "gpu", "sections": 8, "sec_clean": 8, "page_warns": 0, "tok": 1309, "par_sec": 10.1, "candidate": "bao.qwen-3-8-27_latest.1"}
